@@ -1,4 +1,4 @@
-# [QUIZ CHALLENGE] (https://github.com/StreetOfCode/OOP-Challenges/tree/QUIZ)
+# [QUIZ CHALLENGE](https://github.com/StreetOfCode/OOP-Challenges/tree/QUIZ)
 ## Difficulty: EASY
 ##### Remember to write readable, clean code with object oriented principles. The goal of this challenge is to practice Java OOP concepts while maintaining simplicity. 
 ##### Beware of over engineering. The hardest thing is to find balance.
