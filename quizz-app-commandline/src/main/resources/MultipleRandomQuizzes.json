@@ -49,5 +49,56 @@
         ]
       }
     ]
+  },
+  {
+    "name": "Random Quizz 2",
+    "questions": [
+      {
+        "type": "singleChoice",
+        "description": "How much is the fish?",
+        "questionChoices": [
+          {
+            "description": "A lot",
+            "isCorrect": true
+          },
+          {
+            "description": "Not much",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "type": "multiChoice",
+        "description": "Is it?",
+        "questionChoices": [
+          {
+            "description": "sure",
+            "isCorrect": true
+          },
+          {
+            "description": "no",
+            "isCorrect": false
+          },
+          {
+            "description": "yes",
+            "isCorrect": true
+          }
+        ]
+      },
+      {
+        "type": "singleChoice",
+        "description": "That's interesting",
+        "questionChoices": [
+          {
+            "description": "not really",
+            "isCorrect": true
+          },
+          {
+            "description": "of course",
+            "isCorrect": false
+          }
+        ]
+      }
+    ]
   }
 ]

@@ -1,6 +1,10 @@
 package sk.kubo.quizz;
 
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +13,7 @@ import sk.kubo.quizz.model.Answer;
 import sk.kubo.quizz.model.Question;
 import sk.kubo.quizz.model.Quizz;
 import sk.kubo.quizz.model.QuizzResult;
+import sk.kubo.quizz.source.BuiltinQuizzSource;
 import sk.kubo.quizz.source.JsonQuizzSource;
 import sk.kubo.quizz.source.spi.QuizzSource;
 
@@ -24,8 +29,29 @@ public class CommandLineApplication {
     }
 
     public static void main(String[] args) {
-        new CommandLineApplication(new JsonQuizzSource(ClassLoader.getSystemResourceAsStream("RandomQuizz1.json")), new CommandLineInput(System.in)).run();
-//        new CommandLineApplication(new HardcodedQuizzSource(), new CommandLineInput(System.in)).run();
+        if (args.length == 1) {
+            InputStream fileSource = loadJsonFile(args[0]);
+            new CommandLineApplication(new JsonQuizzSource(fileSource), new CommandLineInput(System.in)).run();
+        } else {
+            new CommandLineApplication(new BuiltinQuizzSource(), new CommandLineInput(System.in)).run();
+        }
+    }
+
+    private static InputStream loadJsonFile(String path) {
+        InputStream fileSource = null;
+        try {
+            final Path quizzSourcePath = Path.of(path);
+            if (Files.exists(quizzSourcePath)) {
+                fileSource = Files.newInputStream(quizzSourcePath);
+            } else {
+                System.out.println("Invalid quizz source file path [" + quizzSourcePath.toAbsolutePath().toString() + "]. Using built in one. ");
+                fileSource = ClassLoader.getSystemResourceAsStream("MultipleRandomQuizzes.json");
+            }
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }
+        return fileSource;
     }
 
     public void run() {

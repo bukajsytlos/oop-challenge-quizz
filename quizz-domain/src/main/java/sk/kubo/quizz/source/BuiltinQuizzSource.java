@@ -7,7 +7,7 @@ import sk.kubo.quizz.model.QuestionFactory;
 import sk.kubo.quizz.model.Quizz;
 import sk.kubo.quizz.source.spi.QuizzSource;
 
-public class HardcodedQuizzSource implements QuizzSource {
+public class BuiltinQuizzSource implements QuizzSource {
     @Override
     public List<Quizz> getQuizzes() {
         return List.of(
