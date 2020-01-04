@@ -12,7 +12,7 @@
   <modules>
     <module>quizz-domain</module>
     <module>quizz-app-commandline</module>
-    <module>quizz-jsonfile-source</module>
+    <module>quizz-json-source</module>
   </modules>
 
   <name>Quizz</name>

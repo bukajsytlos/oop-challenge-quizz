@@ -1,6 +1,7 @@
 package sk.kubo.quizz;
 
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +11,7 @@ import sk.kubo.quizz.model.Question;
 import sk.kubo.quizz.model.Quizz;
 import sk.kubo.quizz.model.QuizzResult;
 import sk.kubo.quizz.source.HardcodedQuizzSource;
+import sk.kubo.quizz.source.JsonQuizzSource;
 import sk.kubo.quizz.source.spi.QuizzSource;
 
 public class CommandLineApplication {
@@ -24,14 +26,19 @@ public class CommandLineApplication {
     }
 
     public static void main(String[] args) {
-        new CommandLineApplication(new HardcodedQuizzSource(), new CommandLineInput(System.in)).run();
+        new CommandLineApplication(new JsonQuizzSource(ClassLoader.getSystemResourceAsStream("RandomQuizz1.json")), new CommandLineInput(System.in)).run();
+//        new CommandLineApplication(new HardcodedQuizzSource(), new CommandLineInput(System.in)).run();
     }
 
     public void run() {
-        printWelcomeMessage();
-        do {
-            evaluateMainMenu();
-        } while (true);
+        try {
+            printWelcomeMessage();
+            do {
+                evaluateMainMenu();
+            } while (true);
+        } catch (Exception e) {
+            System.err.println("Application failed. Reason: " + e.getMessage());
+        }
     }
 
     private void evaluateMainMenu() {

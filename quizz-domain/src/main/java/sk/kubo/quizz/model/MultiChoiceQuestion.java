@@ -5,11 +5,11 @@ import java.util.List;
 public class MultiChoiceQuestion extends Question {
     private List<QuestionChoice> correctAnswers;
 
-    public MultiChoiceQuestion(String text, List<QuestionChoice> answerChoices) {
-        super(text, answerChoices);
+    public MultiChoiceQuestion(String description, List<QuestionChoice> answerChoices) {
+        super(description, answerChoices);
         this.correctAnswers = super.getCorrectAnswers();
         if (correctAnswers.isEmpty()) {
-            throw new IllegalArgumentException("Multi-choice question should have at least on correct choice. Question [" + text + "]");
+            throw new IllegalArgumentException("Multi-choice question should have at least on correct choice. Question [" + description + "]");
         }
     }
 

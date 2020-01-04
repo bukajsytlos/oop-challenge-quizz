@@ -5,11 +5,11 @@ import java.util.List;
 public class SingleChoiceQuestion extends Question {
     private QuestionChoice correctAnswer;
 
-    public SingleChoiceQuestion(String text, List<QuestionChoice> answerChoices) {
-        super(text, answerChoices);
+    public SingleChoiceQuestion(String description, List<QuestionChoice> answerChoices) {
+        super(description, answerChoices);
         final List<QuestionChoice> correctAnswers = getCorrectAnswers();
         if (correctAnswers.size() != 1) {
-            throw new IllegalArgumentException("Single choice question should have only one correct answer. Question [" + text + "]");
+            throw new IllegalArgumentException("Single choice question should have only one correct answer. Question [" + description + "]");
         }
         this.correctAnswer = correctAnswers.stream().findFirst().orElseThrow();
     }
