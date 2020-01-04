@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import sk.kubo.quizz.model.Answer;
+import sk.kubo.quizz.model.FreeAnswer;
+import sk.kubo.quizz.model.FreeQuestion;
 import sk.kubo.quizz.model.MultiChoiceAnswer;
 import sk.kubo.quizz.model.MultiChoiceQuestion;
 import sk.kubo.quizz.model.NoAnswer;
@@ -44,6 +46,13 @@ public class CommandLineQuestionEvaluator implements QuestionEvaluator {
             .map(chosenChoiceIndex -> questionChoices.get(chosenChoiceIndex - 1))
             .collect(Collectors.toList());
         return new MultiChoiceAnswer(question, chosenChoices);
+    }
+
+    @Override
+    public Answer<?> evaluate(FreeQuestion question) {
+        System.out.println(question.getDescription() + "[free text]");
+        final String answer = commandLineInput.readTextUserInput();
+        return new FreeAnswer(question, answer);
     }
 
     @Override

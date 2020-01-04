@@ -2,7 +2,6 @@ package sk.kubo.quizz;
 
 import java.io.InputStream;
 import java.util.Arrays;
-import java.util.IllegalFormatException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -13,6 +12,11 @@ public class CommandLineInput {
 
     public CommandLineInput(InputStream inputStream) {
         scanner = new Scanner(inputStream);
+    }
+
+    public String readTextUserInput() {
+        System.out.print("Enter text: ");
+        return scanner.next();
     }
 
     public int readNumericUserInput(int maxValue) {

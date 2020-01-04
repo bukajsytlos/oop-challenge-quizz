@@ -34,6 +34,10 @@ public class BuiltinQuizzSource implements QuizzSource {
                         new QuestionChoice("3 * 630340", false)
                     )
                 ))
+                .addQuestion(QuestionFactory.createLenientQuestion(
+                    "There are 5 birds on the tree. You shot 2 of them. How many are left?",
+                    answer -> answer.contains("none")
+                ))
                 .build()
         );
     }

@@ -2,7 +2,7 @@ package sk.kubo.quizz.model;
 
 import java.util.List;
 
-public class SingleChoiceQuestion extends Question {
+public class SingleChoiceQuestion extends ChoiceQuestion {
     private QuestionChoice correctAnswer;
 
     public SingleChoiceQuestion(String description, List<QuestionChoice> answerChoices) {

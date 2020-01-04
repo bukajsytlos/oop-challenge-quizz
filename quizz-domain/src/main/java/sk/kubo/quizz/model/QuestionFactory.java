@@ -1,6 +1,7 @@
 package sk.kubo.quizz.model;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public class QuestionFactory {
     private QuestionFactory() throws IllegalAccessException {
@@ -13,5 +14,9 @@ public class QuestionFactory {
 
     public static SingleChoiceQuestion createSingleChoiceQuestion(String text, List<QuestionChoice> answerChoices) {
         return new SingleChoiceQuestion(text, answerChoices);
+    }
+
+    public static FreeQuestion createLenientQuestion(String text, Predicate<String> correctAnswerPredicate) {
+        return new FreeQuestion(text, correctAnswerPredicate);
     }
 }
