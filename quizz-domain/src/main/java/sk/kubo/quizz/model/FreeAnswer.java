@@ -1,11 +1,13 @@
 package sk.kubo.quizz.model;
 
+import static com.toddfast.util.preconditions.Preconditions.argumentNotNull;
+
 public class FreeAnswer extends Answer<FreeQuestion> {
     private String answer;
 
     public FreeAnswer(FreeQuestion question, String answer) {
         super(question);
-        this.answer = answer;
+        this.answer = argumentNotNull(answer, "answer");
     }
 
     @Override

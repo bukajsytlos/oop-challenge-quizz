@@ -1,11 +1,13 @@
 package sk.kubo.quizz.model;
 
+import static com.toddfast.util.preconditions.Preconditions.argumentNotNull;
+
 public class SingleChoiceAnswer extends Answer<SingleChoiceQuestion> {
     private QuestionChoice selectedChoice;
 
     public SingleChoiceAnswer(SingleChoiceQuestion question, QuestionChoice selectedChoice) {
         super(question);
-        this.selectedChoice = selectedChoice;
+        this.selectedChoice = argumentNotNull(selectedChoice, "selectedChoice");
     }
 
     @Override

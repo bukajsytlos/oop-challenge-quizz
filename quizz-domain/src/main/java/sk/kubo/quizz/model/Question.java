@@ -1,12 +1,14 @@
 package sk.kubo.quizz.model;
 
+import static com.toddfast.util.preconditions.Preconditions.argumentIsValue;
+
 import java.util.Objects;
 
 public abstract class Question {
     private String description;
 
     protected Question(String description) {
-        this.description = description;
+        this.description = argumentIsValue(description, "description");
     }
 
     public String getDescription() {

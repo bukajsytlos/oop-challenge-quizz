@@ -1,5 +1,7 @@
 package sk.kubo.quizz.model;
 
+import static com.toddfast.util.preconditions.Preconditions.argumentNotNull;
+
 import java.util.function.Predicate;
 
 public class FreeQuestion extends Question {
@@ -7,7 +9,7 @@ public class FreeQuestion extends Question {
 
     protected FreeQuestion(String description, Predicate<String> correctAnswerPredicate) {
         super(description);
-        this.correctAnswerPredicate = correctAnswerPredicate;
+        this.correctAnswerPredicate = argumentNotNull(correctAnswerPredicate, "correctAnswerPredicate");
     }
 
     @Override

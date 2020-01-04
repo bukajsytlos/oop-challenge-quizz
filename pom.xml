@@ -23,10 +23,16 @@
     <maven.compiler.target>11</maven.compiler.target>
     <junit-jupiter.version>5.5.2</junit-jupiter.version>
     <assertj-core.version>3.13.2</assertj-core.version>
+    <requirements-java.version>5.2.2</requirements-java.version>
   </properties>
 
  <dependencyManagement>
    <dependencies>
+     <dependency>
+       <groupId>org.bitbucket.cowwoc.requirements</groupId>
+       <artifactId>java</artifactId>
+       <version>${requirements-java.version}</version>
+     </dependency>
      <dependency>
        <groupId>org.junit.jupiter</groupId>
        <artifactId>junit-jupiter-engine</artifactId>

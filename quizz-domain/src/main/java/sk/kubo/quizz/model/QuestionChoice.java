@@ -1,6 +1,6 @@
 package sk.kubo.quizz.model;
 
-import static org.assertj.core.util.Preconditions.checkNotNull;
+import static com.toddfast.util.preconditions.Preconditions.argumentIsValue;
 
 import java.util.Objects;
 
@@ -9,8 +9,7 @@ public class QuestionChoice {
     private boolean isCorrect;
 
     public QuestionChoice(String description, boolean isCorrect) {
-        checkNotNull(description, "QuestionChoice description not provided!");
-        this.description = description;
+        this.description = argumentIsValue(description, "description");
         this.isCorrect = isCorrect;
     }
 
