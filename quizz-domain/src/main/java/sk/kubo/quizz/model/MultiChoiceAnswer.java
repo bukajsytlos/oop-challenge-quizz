@@ -16,6 +16,6 @@ public class MultiChoiceAnswer extends Answer<MultiChoiceQuestion> {
         if (selectedChoices.isEmpty()) {
             return false;
         }
-        return question.getCorrectAnswers().containsAll(selectedChoices);
+        return selectedChoices.containsAll(question.getCorrectAnswers());
     }
 }

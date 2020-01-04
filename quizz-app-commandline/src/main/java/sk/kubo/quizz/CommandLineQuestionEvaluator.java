@@ -28,7 +28,7 @@ public class CommandLineQuestionEvaluator implements QuestionEvaluator {
         for (int answerIndex = 0; answerIndex < questionChoices.size(); answerIndex++) {
             System.out.println((answerIndex + 1) + ". " + questionChoices.get(answerIndex).getDescription());
         }
-        final int chosenChoiceIndex = commandLineInput.readNumericUserInput();
+        final int chosenChoiceIndex = commandLineInput.readNumericUserInput(questionChoices.size());
         return new SingleChoiceAnswer(question, questionChoices.get(chosenChoiceIndex - 1));
     }
 
@@ -39,7 +39,7 @@ public class CommandLineQuestionEvaluator implements QuestionEvaluator {
         for (int answerIndex = 0; answerIndex < questionChoices.size(); answerIndex++) {
             System.out.println((answerIndex + 1) + ". " + questionChoices.get(answerIndex).getDescription());
         }
-        final List<Integer> chosenChoiceIndices = commandLineInput.readMultiNumericUserInput();
+        final List<Integer> chosenChoiceIndices = commandLineInput.readMultiNumericUserInput(questionChoices.size());
         final List<QuestionChoice> chosenChoices = chosenChoiceIndices.stream()
             .map(chosenChoiceIndex -> questionChoices.get(chosenChoiceIndex - 1))
             .collect(Collectors.toList());

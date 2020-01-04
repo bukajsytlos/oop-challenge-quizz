@@ -1,7 +1,6 @@
 package sk.kubo.quizz;
 
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +9,6 @@ import sk.kubo.quizz.model.Answer;
 import sk.kubo.quizz.model.Question;
 import sk.kubo.quizz.model.Quizz;
 import sk.kubo.quizz.model.QuizzResult;
-import sk.kubo.quizz.source.HardcodedQuizzSource;
 import sk.kubo.quizz.source.JsonQuizzSource;
 import sk.kubo.quizz.source.spi.QuizzSource;
 
@@ -48,7 +46,7 @@ public class CommandLineApplication {
     }
 
     private void chooseMenuItem() {
-        final int chosenMenuItem = commandLineInput.readNumericUserInput();
+        final int chosenMenuItem = commandLineInput.readNumericUserInput(1);
         switch (chosenMenuItem) {
             case 1:
                 takeQuizz();
@@ -78,7 +76,7 @@ public class CommandLineApplication {
         for (int index = 0; index < quizzes.size(); index++) {
             System.out.println((index + 1) + ". " + quizzes.get(index).getName());
         }
-        final int chosenQuizzIndex = commandLineInput.readNumericUserInput();
+        final int chosenQuizzIndex = commandLineInput.readNumericUserInput(quizzes.size());
         return quizzes.get(chosenQuizzIndex - 1);
     }
 
