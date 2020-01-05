@@ -22,9 +22,4 @@ public class MultiChoiceQuestion extends ChoiceQuestion<List<QuestionChoice>> {
         }
         return choices.containsAll(correctAnswers);
     }
-
-    @Override
-    public MultiChoiceAnswer acceptQuestionVisitor(QuestionEvaluator questionEvaluator) {
-        return questionEvaluator.evaluate(this);
-    }
 }

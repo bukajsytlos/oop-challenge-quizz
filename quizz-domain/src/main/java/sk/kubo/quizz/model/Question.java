@@ -17,8 +17,6 @@ public abstract class Question<ANSWER_TYPE> {
 
     public abstract boolean evaluate(ANSWER_TYPE answer);
 
-    public abstract Answer<?, ?> acceptQuestionVisitor(QuestionEvaluator questionEvaluator);
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

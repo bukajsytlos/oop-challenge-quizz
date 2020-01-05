@@ -16,10 +16,4 @@ public class FreeQuestion extends Question<String> {
     public boolean evaluate(String answer) {
         return correctAnswerPredicate.test(answer);
     }
-
-    @Override
-    public FreeAnswer acceptQuestionVisitor(QuestionEvaluator questionEvaluator) {
-        return questionEvaluator.evaluate(this);
-    }
-
 }

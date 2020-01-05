@@ -21,9 +21,4 @@ public class SingleChoiceQuestion extends ChoiceQuestion<QuestionChoice> {
         }
         return correctAnswer.equals(answer);
     }
-
-    @Override
-    public SingleChoiceAnswer acceptQuestionVisitor(QuestionEvaluator questionEvaluator) {
-        return questionEvaluator.evaluate(this);
-    }
 }

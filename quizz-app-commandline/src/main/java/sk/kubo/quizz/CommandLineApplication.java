@@ -8,11 +8,20 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import sk.kubo.quizz.model.Answer;
+import sk.kubo.quizz.model.FreeAnswer;
+import sk.kubo.quizz.model.FreeQuestion;
+import sk.kubo.quizz.model.MultiChoiceAnswer;
+import sk.kubo.quizz.model.MultiChoiceQuestion;
+import sk.kubo.quizz.model.NoAnswer;
 import sk.kubo.quizz.model.Question;
+import sk.kubo.quizz.model.QuestionChoice;
 import sk.kubo.quizz.model.Quizz;
 import sk.kubo.quizz.model.QuizzResult;
+import sk.kubo.quizz.model.SingleChoiceAnswer;
+import sk.kubo.quizz.model.SingleChoiceQuestion;
 import sk.kubo.quizz.source.BuiltinQuizzSource;
 import sk.kubo.quizz.source.JsonQuizzSource;
 import sk.kubo.quizz.source.spi.QuizzSource;
@@ -20,12 +29,10 @@ import sk.kubo.quizz.source.spi.QuizzSource;
 public class CommandLineApplication {
     private List<Quizz> quizzes;
     private CommandLineInput commandLineInput;
-    private CommandLineQuestionEvaluator questionEvaluator;
 
     public CommandLineApplication(QuizzSource quizzSource, CommandLineInput commandLineInput) {
         this.quizzes = quizzSource.getQuizzes();
         this.commandLineInput = commandLineInput;
-        this.questionEvaluator = new CommandLineQuestionEvaluator(commandLineInput);
     }
 
     public static void main(String[] args) {
@@ -111,10 +118,40 @@ public class CommandLineApplication {
         System.out.println("Quizz [" + quizz.getName() + "] has been chosen. Let's start");
         List<Answer<?, ?>> answers = new ArrayList<>();
         for (Question<?> question : quizz.getQuestions()) {
-            answers.add(question.acceptQuestionVisitor(questionEvaluator));
+            answers.add(evaluateQuestion(question));
         }
         final QuizzResult quizzResult = new QuizzResult(quizz, answers);
         System.out.println(String.format("You have %d correct answers out of %d", quizzResult.correctAnswersCount(), quizzResult.totalQuestionsCount()));
+    }
+
+    private Answer<?, ?> evaluateQuestion(Question<?> question) {
+        if (question instanceof FreeQuestion) {
+            System.out.println(question.getDescription() + "[free text]");
+            final String answer = commandLineInput.readTextUserInput();
+            return new FreeAnswer((FreeQuestion) question, answer);
+        } else if (question instanceof SingleChoiceQuestion) {
+            System.out.println(question.getDescription() + "[single choice]");
+            final List<QuestionChoice> questionChoices = ((SingleChoiceQuestion) question).getQuestionChoices();
+            for (int answerIndex = 0; answerIndex < questionChoices.size(); answerIndex++) {
+                System.out.println((answerIndex + 1) + ". " + questionChoices.get(answerIndex).getDescription());
+            }
+            final int chosenChoiceIndex = commandLineInput.readNumericUserInput(questionChoices.size());
+            return new SingleChoiceAnswer(((SingleChoiceQuestion) question), questionChoices.get(chosenChoiceIndex - 1));
+        } else if (question instanceof MultiChoiceQuestion) {
+            System.out.println(question.getDescription() + "[multiple choices]");
+            final List<QuestionChoice> questionChoices = ((MultiChoiceQuestion) question).getQuestionChoices();
+            for (int answerIndex = 0; answerIndex < questionChoices.size(); answerIndex++) {
+                System.out.println((answerIndex + 1) + ". " + questionChoices.get(answerIndex).getDescription());
+            }
+            final List<Integer> chosenChoiceIndices = commandLineInput.readMultiNumericUserInput(questionChoices.size());
+            final List<QuestionChoice> chosenChoices = chosenChoiceIndices.stream()
+                .map(chosenChoiceIndex -> questionChoices.get(chosenChoiceIndex - 1))
+                .collect(Collectors.toList());
+            return new MultiChoiceAnswer(((MultiChoiceQuestion) question), chosenChoices);
+        } else {
+            System.out.println("Question of unknown type [" + question.getClass().getSimpleName() + "]. Skipping question.");
+            return new NoAnswer(question);
+        }
     }
 
     private void printWelcomeMessage() {
