@@ -4,7 +4,7 @@ import static com.toddfast.util.preconditions.Preconditions.argumentIsValue;
 
 import java.util.Objects;
 
-public abstract class Question {
+public abstract class Question<ANSWER_TYPE> {
     private String description;
 
     protected Question(String description) {
@@ -15,13 +15,15 @@ public abstract class Question {
         return description;
     }
 
-    public abstract Answer<?> acceptQuestionVisitor(QuestionEvaluator questionEvaluator);
+    public abstract boolean evaluate(ANSWER_TYPE answer);
+
+    public abstract Answer<?, ?> acceptQuestionVisitor(QuestionEvaluator questionEvaluator);
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Question)) return false;
-        Question question = (Question) o;
+        Question<?> question = (Question<?>) o;
         return getDescription().equals(question.getDescription());
     }
 

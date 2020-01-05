@@ -2,7 +2,7 @@ package sk.kubo.quizz.model;
 
 import java.util.List;
 
-public class SingleChoiceQuestion extends ChoiceQuestion {
+public class SingleChoiceQuestion extends ChoiceQuestion<QuestionChoice> {
     private QuestionChoice correctAnswer;
 
     public SingleChoiceQuestion(String description, List<QuestionChoice> answerChoices) {
@@ -14,12 +14,16 @@ public class SingleChoiceQuestion extends ChoiceQuestion {
         this.correctAnswer = correctAnswers.stream().findFirst().orElseThrow();
     }
 
-    public QuestionChoice getCorrectAnswer() {
-        return correctAnswer;
+    @Override
+    public boolean evaluate(QuestionChoice answer) {
+        if (answer == null) {
+            return false;
+        }
+        return correctAnswer.equals(answer);
     }
 
     @Override
-    public Answer<?> acceptQuestionVisitor(QuestionEvaluator questionEvaluator) {
+    public SingleChoiceAnswer acceptQuestionVisitor(QuestionEvaluator questionEvaluator) {
         return questionEvaluator.evaluate(this);
     }
 }

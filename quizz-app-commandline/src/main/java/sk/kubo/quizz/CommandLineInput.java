@@ -2,6 +2,7 @@ package sk.kubo.quizz;
 
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -27,7 +28,7 @@ public class CommandLineInput {
                 throw new IllegalArgumentException("Chosen value exceed max value [" + maxValue + "]");
             }
             return Math.max(number, 0);
-        } catch (Exception e) {
+        } catch (InputMismatchException e) {
             System.out.println("Wrong input. Choose again.");
             return readNumericUserInput(maxValue);
         }
@@ -48,7 +49,7 @@ public class CommandLineInput {
                 })
                 .map(value -> Math.max(value, 0))
                 .collect(Collectors.toList());
-        } catch (Exception e) {
+        } catch (InputMismatchException e) {
             System.out.println("Wrong input. Choose again.");
             return readMultiNumericUserInput(maxValue);
         }

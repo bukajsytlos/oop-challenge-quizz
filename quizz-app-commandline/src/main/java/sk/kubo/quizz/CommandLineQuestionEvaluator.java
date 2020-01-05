@@ -24,7 +24,7 @@ public class CommandLineQuestionEvaluator implements QuestionEvaluator {
     }
 
     @Override
-    public Answer<?> evaluate(SingleChoiceQuestion question) {
+    public SingleChoiceAnswer evaluate(SingleChoiceQuestion question) {
         System.out.println(question.getDescription() + "[single choice]");
         final List<QuestionChoice> questionChoices = question.getQuestionChoices();
         for (int answerIndex = 0; answerIndex < questionChoices.size(); answerIndex++) {
@@ -35,7 +35,7 @@ public class CommandLineQuestionEvaluator implements QuestionEvaluator {
     }
 
     @Override
-    public Answer<?> evaluate(MultiChoiceQuestion question) {
+    public MultiChoiceAnswer evaluate(MultiChoiceQuestion question) {
         System.out.println(question.getDescription() + "[multiple choices]");
         final List<QuestionChoice> questionChoices = question.getQuestionChoices();
         for (int answerIndex = 0; answerIndex < questionChoices.size(); answerIndex++) {
@@ -49,14 +49,14 @@ public class CommandLineQuestionEvaluator implements QuestionEvaluator {
     }
 
     @Override
-    public Answer<?> evaluate(FreeQuestion question) {
+    public FreeAnswer evaluate(FreeQuestion question) {
         System.out.println(question.getDescription() + "[free text]");
         final String answer = commandLineInput.readTextUserInput();
         return new FreeAnswer(question, answer);
     }
 
     @Override
-    public Answer<?> evaluate(Question question) {
+    public Answer<?, ?> evaluate(Question<?> question) {
         System.out.println("Question of unknown type [" + question.getClass().getSimpleName() + "]. Skipping question.");
         return new NoAnswer(question);
     }

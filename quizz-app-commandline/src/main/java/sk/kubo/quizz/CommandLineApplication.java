@@ -62,6 +62,7 @@ public class CommandLineApplication {
             } while (true);
         } catch (Exception e) {
             System.err.println("Application failed. Reason: " + e.getMessage());
+            System.exit(1);
         }
     }
 
@@ -108,8 +109,8 @@ public class CommandLineApplication {
 
     private void evaluateQuizz(Quizz quizz) {
         System.out.println("Quizz [" + quizz.getName() + "] has been chosen. Let's start");
-        List<Answer<?>> answers = new ArrayList<>();
-        for (Question question : quizz.getQuestions()) {
+        List<Answer<?, ?>> answers = new ArrayList<>();
+        for (Question<?> question : quizz.getQuestions()) {
             answers.add(question.acceptQuestionVisitor(questionEvaluator));
         }
         final QuizzResult quizzResult = new QuizzResult(quizz, answers);

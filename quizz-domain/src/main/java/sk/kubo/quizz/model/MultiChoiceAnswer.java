@@ -1,21 +1,16 @@
 package sk.kubo.quizz.model;
 
-import java.util.Collections;
+import static com.toddfast.util.preconditions.Preconditions.collectionNotEmpty;
+
 import java.util.List;
 
-public class MultiChoiceAnswer extends Answer<MultiChoiceQuestion> {
-    private List<QuestionChoice> selectedChoices;
-
+public class MultiChoiceAnswer extends Answer<MultiChoiceQuestion, List<QuestionChoice>> {
     public MultiChoiceAnswer(MultiChoiceQuestion question, List<QuestionChoice> selectedChoices) {
-        super(question);
-        this.selectedChoices = collectionNotEmpty(selectedChoices, "selectedChoices");
+        super(question, collectionNotEmpty(selectedChoices, "selectedChoices"));
     }
 
     @Override
     public boolean isCorrect() {
-        if (selectedChoices.isEmpty()) {
-            return false;
-        }
-        return selectedChoices.containsAll(question.getCorrectAnswers());
+        return question.evaluate(answer);
     }
 }

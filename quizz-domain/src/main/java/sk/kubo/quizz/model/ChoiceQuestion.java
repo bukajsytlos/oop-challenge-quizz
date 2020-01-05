@@ -3,9 +3,9 @@ package sk.kubo.quizz.model;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class ChoiceQuestion extends Question {
-    public static final int MAX_CHOICE_COUNT = 5;
+public abstract class ChoiceQuestion<ANSWER_TYPE> extends Question<ANSWER_TYPE> {
     public static final int MIN_CHOICE_COUNT = 2;
+    public static final int MAX_CHOICE_COUNT = 5;
 
     private List<QuestionChoice> questionChoices;
 

@@ -4,7 +4,7 @@ import static com.toddfast.util.preconditions.Preconditions.argumentNotNull;
 
 import java.util.function.Predicate;
 
-public class FreeQuestion extends Question {
+public class FreeQuestion extends Question<String> {
     private Predicate<String> correctAnswerPredicate;
 
     protected FreeQuestion(String description, Predicate<String> correctAnswerPredicate) {
@@ -13,11 +13,13 @@ public class FreeQuestion extends Question {
     }
 
     @Override
-    public Answer<?> acceptQuestionVisitor(QuestionEvaluator questionEvaluator) {
+    public boolean evaluate(String answer) {
+        return correctAnswerPredicate.test(answer);
+    }
+
+    @Override
+    public FreeAnswer acceptQuestionVisitor(QuestionEvaluator questionEvaluator) {
         return questionEvaluator.evaluate(this);
     }
 
-    public boolean isCorrect(String answerValue) {
-        return correctAnswerPredicate.test(answerValue);
-    }
 }

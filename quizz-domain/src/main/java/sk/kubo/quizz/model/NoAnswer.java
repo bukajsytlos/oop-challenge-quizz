@@ -1,8 +1,9 @@
 package sk.kubo.quizz.model;
 
-public class NoAnswer extends Answer<Question> {
-    public NoAnswer(Question question) {
-        super(question);
+@SuppressWarnings({"unchecked", "rawtypes"})
+public class NoAnswer extends Answer {
+    public NoAnswer(Question<?> question) {
+        super(question, null);
     }
 
     @Override

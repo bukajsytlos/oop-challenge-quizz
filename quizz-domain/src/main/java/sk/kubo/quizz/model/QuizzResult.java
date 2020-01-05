@@ -6,9 +6,9 @@ import java.util.List;
 
 public class QuizzResult {
     private Quizz quizz;
-    private List<Answer<?>> answers;
+    private List<Answer<?, ?>> answers;
 
-    public QuizzResult(Quizz quizz, List<Answer<?>> answers) {
+    public QuizzResult(Quizz quizz, List<Answer<?, ?>> answers) {
         this.quizz = argumentNotNull(quizz, "quizz");
         this.answers = argumentNotNull(answers, "answers");
         answers.stream()
