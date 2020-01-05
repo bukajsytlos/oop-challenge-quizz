@@ -16,7 +16,7 @@ public class QuestionFactory {
         return new SingleChoiceQuestion(text, answerChoices);
     }
 
-    public static FreeQuestion createLenientQuestion(String text, Predicate<String> correctAnswerPredicate) {
+    public static FreeQuestion createFreeQuestion(String text, Predicate<String> correctAnswerPredicate) {
         return new FreeQuestion(text, correctAnswerPredicate);
     }
 }

@@ -8,7 +8,7 @@ public class MultiChoiceAnswer extends Answer<MultiChoiceQuestion> {
 
     public MultiChoiceAnswer(MultiChoiceQuestion question, List<QuestionChoice> selectedChoices) {
         super(question);
-        this.selectedChoices = selectedChoices != null ? selectedChoices : Collections.emptyList();
+        this.selectedChoices = collectionNotEmpty(selectedChoices, "selectedChoices");
     }
 
     @Override
