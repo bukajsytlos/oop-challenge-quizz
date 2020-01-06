@@ -4,6 +4,8 @@ import java.util.List;
 
 public class QuestionFixture {
     static final FreeQuestion FREE_QUESTION = QuestionFactory.createFreeQuestion("How do you do?", answer -> answer.contains("fine"));
+    static final String CORRECT_FREE_QUESTION_ANSWER = "I'm fine";
+    static final String INCORRECT_FREE_QUESTION_ANSWER = "Not very well";
     static final QuestionChoice FIRST_CORRECT_CHOICE = new QuestionChoice("2", true);
     static final QuestionChoice SECOND_CORRECT_CHOICE = new QuestionChoice("2^1", true);
     static final QuestionChoice INCORRECT_CHOICE = new QuestionChoice("1", false);
