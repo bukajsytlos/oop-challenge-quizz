@@ -5,7 +5,7 @@ import static com.toddfast.util.preconditions.Preconditions.argumentNotNull;
 import java.util.function.Predicate;
 
 public class FreeQuestion extends Question<String> {
-    private Predicate<String> correctAnswerPredicate;
+    private final Predicate<String> correctAnswerPredicate;
 
     protected FreeQuestion(String description, Predicate<String> correctAnswerPredicate) {
         super(description);

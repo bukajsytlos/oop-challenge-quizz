@@ -5,8 +5,8 @@ import static com.toddfast.util.preconditions.Preconditions.argumentNotNull;
 import java.util.List;
 
 public class QuizzResult {
-    private Quizz quizz;
-    private List<Answer<?, ?>> answers;
+    private final Quizz quizz;
+    private final List<Answer<?, ?>> answers;
 
     public QuizzResult(Quizz quizz, List<Answer<?, ?>> answers) {
         this.quizz = argumentNotNull(quizz, "quizz");

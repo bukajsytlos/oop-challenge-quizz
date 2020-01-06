@@ -5,8 +5,8 @@ import static com.toddfast.util.preconditions.Preconditions.argumentIsValue;
 import java.util.Objects;
 
 public class QuestionChoice {
-    private String description;
-    private boolean isCorrect;
+    private final String description;
+    private final boolean isCorrect;
 
     public QuestionChoice(String description, boolean isCorrect) {
         this.description = argumentIsValue(description, "description");

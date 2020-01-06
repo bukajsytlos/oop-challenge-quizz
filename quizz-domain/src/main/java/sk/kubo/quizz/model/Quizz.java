@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Quizz {
-    private String name;
-    private List<Question> questions;
+    private final String name;
+    private List<Question<?>> questions;
 
-    private Quizz(String name, List<Question> questions) {
+    private Quizz(String name, List<Question<?>> questions) {
         this.name = argumentIsValue(name, "name");
         if (questions == null || questions.size() < 3) {
             throw new IllegalArgumentException("Quizz should have at least 3 questions");
@@ -21,19 +21,19 @@ public class Quizz {
         return name;
     }
 
-    public List<Question> getQuestions() {
+    public List<Question<?>> getQuestions() {
         return questions;
     }
 
     public static class Builder {
-        private String name;
-        private List<Question> questions = new ArrayList<>();
+        private final String name;
+        private final List<Question<?>> questions = new ArrayList<>();
 
         public Builder(String name) {
             this.name = name;
         }
 
-        public Builder addQuestion(Question question) {
+        public Builder addQuestion(Question<?> question) {
             questions.add(question);
             return this;
         }

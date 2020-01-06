@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MultiChoiceQuestion extends ChoiceQuestion<List<QuestionChoice>> {
-    private List<QuestionChoice> correctAnswers;
+    private final List<QuestionChoice> correctAnswers;
 
     public MultiChoiceQuestion(String description, List<QuestionChoice> answerChoices) {
         super(description, answerChoices);

@@ -18,5 +18,5 @@ public abstract class QuestionDto {
     public String description;
     public List<QuestionChoiceDto> questionChoices;
 
-    public abstract Question asQuestion();
+    public abstract Question<?> asQuestion();
 }

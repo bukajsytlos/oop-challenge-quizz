@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class CommandLineInput {
 
-    private Scanner scanner;
+    private final Scanner scanner;
 
     public CommandLineInput(InputStream inputStream) {
         scanner = new Scanner(inputStream);

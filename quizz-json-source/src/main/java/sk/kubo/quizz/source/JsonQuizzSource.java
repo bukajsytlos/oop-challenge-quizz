@@ -2,7 +2,6 @@ package sk.kubo.quizz.source;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,8 +11,8 @@ import sk.kubo.quizz.model.Quizz;
 import sk.kubo.quizz.source.spi.QuizzSource;
 
 public class JsonQuizzSource implements QuizzSource {
-    private InputStream inputStream;
-    private ObjectMapper objectMapper;
+    private final InputStream inputStream;
+    private final ObjectMapper objectMapper;
 
     public JsonQuizzSource(InputStream inputStream) {
         this.inputStream = inputStream;

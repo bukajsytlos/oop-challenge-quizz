@@ -1,7 +1,7 @@
 package sk.kubo.quizz.model;
 
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +9,7 @@ class FreeQuestionTest {
 
     @Test
     void create_validQuestion_shouldBeOk() {
-        assertDoesNotThrow(() -> QuestionFixture.FREE_QUESTION);
+        assertThatCode(() -> new FreeQuestion("Question", v -> true)).doesNotThrowAnyException();
     }
 
     @Test
@@ -19,7 +19,7 @@ class FreeQuestionTest {
 
     @Test
     void create_questionWithEmptyDescription_shouldThrowException() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new FreeQuestion("", v -> true));;
+        assertThatIllegalArgumentException().isThrownBy(() -> new FreeQuestion("", v -> true));
     }
 
     @Test

@@ -5,7 +5,7 @@ import static com.toddfast.util.preconditions.Preconditions.argumentIsValue;
 import java.util.Objects;
 
 public abstract class Question<ANSWER_TYPE> {
-    private String description;
+    private final String description;
 
     protected Question(String description) {
         this.description = argumentIsValue(description, "description");

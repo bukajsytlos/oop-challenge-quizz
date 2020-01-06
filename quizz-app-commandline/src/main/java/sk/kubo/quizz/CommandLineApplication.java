@@ -27,8 +27,8 @@ import sk.kubo.quizz.source.JsonQuizzSource;
 import sk.kubo.quizz.source.spi.QuizzSource;
 
 public class CommandLineApplication {
-    private List<Quizz> quizzes;
-    private CommandLineInput commandLineInput;
+    private final List<Quizz> quizzes;
+    private final CommandLineInput commandLineInput;
 
     public CommandLineApplication(QuizzSource quizzSource, CommandLineInput commandLineInput) {
         this.quizzes = quizzSource.getQuizzes();
